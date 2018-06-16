@@ -17,6 +17,10 @@ class ListContacts extends Component {
     }));
   };
 
+  resetQuery = () => {
+    this.updateQuery('');
+  };
+
   render() {
     const { query } = this.state;
     const { contacts, onDelete } = this.props;
@@ -39,6 +43,14 @@ class ListContacts extends Component {
             }}
           />
         </div>
+        {showingContacts.length !== contacts.length && (
+          <div className="showing-contacts">
+            <span>
+              Now showing contacts {showingContacts.length} of {contacts.length}
+            </span>
+            <button onClick={this.resetQuery}>Show all</button>
+          </div>
+        )}
         <ol className="contact-list">
           {showingContacts.map(contact => (
             <li key={contact.id} className="contact-list-item">
